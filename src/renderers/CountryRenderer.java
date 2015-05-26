@@ -29,8 +29,7 @@ public class CountryRenderer extends DefaultTableCellRenderer {
     private ImageIcon portugal = loadImage("/res/portugal.png");
     private ImageIcon switzerland = loadImage("/res/switzerland.png");
     private ImageIcon unitedKingdom = loadImage("/res/united_kingdom.png");
-    
-    
+
     private ImageIcon loadImage(String path) {
         ImageIcon imageIcon = new ImageIcon(CountryRenderer.class.getResource(path));
         Image image = imageIcon.getImage();
@@ -40,16 +39,38 @@ public class CountryRenderer extends DefaultTableCellRenderer {
 
     @Override
     protected void setValue(Object value) {
-            if(value.equals("spain")) setIcon(spain);
-            if(value.equals("australia")) setIcon(australia);
-            if(value.equals("austria")) setIcon(austria);
-            if(value.equals("canada")) setIcon(canada);
-            if(value.equals("france")) setIcon(france);
-            if(value.equals("norway")) setIcon(norway);
-            if(value.equals("peru")) setIcon(peru);
-            if(value.equals("poland")) setIcon(poland);
-            if(value.equals("portugal")) setIcon(portugal);
-            if(value.equals("switzerland")) setIcon(switzerland);
-            if(value.equals("united kingdom")) setIcon(unitedKingdom);
+        if (value.equals("spain")) {
+            setIcon(spain);
+        }
+        if (value.equals("australia")) {
+            setIcon(australia);
+        }
+        if (value.equals("austria")) {
+            setIcon(austria);
+        }
+        if (value.equals("canada")) {
+            setIcon(canada);
+        }
+        if (value.equals("france")) {
+            setIcon(france);
+        }
+        if (value.equals("norway")) {
+            setIcon(norway);
+        }
+        if (value.equals("peru")) {
+            setIcon(peru);
+        }
+        if (value.equals("poland")) {
+            setIcon(poland);
+        }
+        if (value.equals("portugal")) {
+            setIcon(portugal);
+        }
+        if (value.equals("switzerland")) {
+            setIcon(switzerland);
+        }
+        if (value.equals("united kingdom")) {
+            setIcon(unitedKingdom);
+        }
     }
 }

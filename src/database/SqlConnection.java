@@ -2,7 +2,7 @@ package database;
 
 import dbview.TableModel;
 import dbview.Configuration;
-import dbview.TableHandler;
+import dbview.BDViewerCore;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -41,11 +41,12 @@ public class SqlConnection {
             return rs;
     }
     
-    public void sendData(String string) {
+    public void sendUpdate(String string) {
         try {
-            stmt.executeUpdate(string);
+            stmt.execute(string);
+            System.out.println("true");
         } catch (SQLException ex) {
-            LOGGER.severe("Error al ejecutar la actualización de base de datos.");
+            JOptionPane.showMessageDialog(null, ex);
         }
     }
     
@@ -63,8 +64,9 @@ public class SqlConnection {
                 }
                 model.addRow(data);
             }
-        } catch (SQLException ex) {
-            Logger.getLogger(TableHandler.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            Logger.getLogger(BDViewerCore.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "No se ha podido realizar la operación sobre la base de datos.");
         }
     }
     

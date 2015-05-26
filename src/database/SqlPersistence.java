@@ -6,8 +6,10 @@ import database.entities.Servers;
 import dbview.TableModel;
 import java.util.List;
 import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
+import javax.swing.JOptionPane;
 
 
 public class SqlPersistence {
@@ -16,9 +18,10 @@ public class SqlPersistence {
     private List<AccountBan> bans;
     private List<Servers> servers;
     
-    EntityManager entityManager = Persistence
-            .createEntityManagerFactory("DBViewPU")
-            .createEntityManager();
+    private EntityTransaction currentTransaction;
+    private EntityManager entityManager = Persistence
+        .createEntityManagerFactory("DBViewPU")
+        .createEntityManager();
     
     /** Sets a specified table model with the information of the accounts
     * loaded from the database */
@@ -93,17 +96,40 @@ public class SqlPersistence {
     
     /** Gets the server items loaded from the database. */
     public List<Servers> getServerItems() {
-        return servers;
+        return entityManager.createNamedQuery("Servers.findAll").getResultList();
     }
     
     /** Gets the account ban items loaded from the database. */
     public List<AccountBan> getBanItems() {
-        return bans;
+        return entityManager.createNamedQuery("AccountBan.findAll").getResultList();
     }
     
     /** Gets the accounts items loaded from the database.
      * @return  */
     public List<Accounts> getAccountsItems() {
-        return accounts;
+        return entityManager.createNamedQuery("Accounts.findAll").getResultList();
+    }
+    
+    public void refresh(Object entity) {
+        entityManager.refresh(entity);
+    }
+    
+    public EntityTransaction newTransaction() {
+            currentTransaction = entityManager.getTransaction();
+            currentTransaction.begin();
+        return currentTransaction;
+    }
+    
+    public EntityTransaction getCurrentTransaction() {
+        return currentTransaction;
+    }
+    
+    public boolean currentTransactionExists() {
+        if(currentTransaction == null) return false;
+        return true;
+    }
+    
+    public void persist(Object entity) {
+        entityManager.persist(entity);
     }
 }

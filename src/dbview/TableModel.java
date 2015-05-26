@@ -14,9 +14,10 @@ public class TableModel extends AbstractTableModel {
     private boolean editable = true;
     private ArrayList<String> columns = new ArrayList<String>();
     private ArrayList<Object[]> data = new ArrayList<Object[]>();
-    private TableHandler tableHandler;
+    private BDViewerCore tableHandler;
     private SqlPersistence sqlPersistence;
-    public TableModel(TableHandler tableHandler) {
+    
+    public TableModel(BDViewerCore tableHandler) {
         this.tableHandler = tableHandler;
         sqlPersistence = tableHandler.getSqlPersistence();
     }
@@ -24,7 +25,7 @@ public class TableModel extends AbstractTableModel {
     @Override
     public boolean isCellEditable(int row, int column) {
         switch(tableHandler.getSelectedTable()) {
-            case TableHandler.ACCOUNTS:
+            case BDViewerCore.ACCOUNTS:
             if(column == 2) return false;
             if(column == 5) return false;
         }
@@ -60,15 +61,15 @@ public class TableModel extends AbstractTableModel {
     @Override
     public void setValueAt(Object value, int row, int column) {
         switch(tableHandler.getSelectedTable()) {
-            case TableHandler.ACCOUNTS:
+            case BDViewerCore.ACCOUNTS:
                 Accounts account = sqlPersistence.getAccountsItems().get(row);
                 if(column == 0) account.setAccountName(String.valueOf(value));
                 else if(column == 1) account.setMd5PassHash(String.valueOf(value));
                 break;
-            case TableHandler.ACCOUNT_BAN:
+            case BDViewerCore.ACCOUNT_BAN:
                 sqlPersistence.getAccountsItems().get(row);
                 break;
-            case TableHandler.SERVERS:
+            case BDViewerCore.SERVERS:
                 sqlPersistence.getAccountsItems().get(row);
                 break;
         }

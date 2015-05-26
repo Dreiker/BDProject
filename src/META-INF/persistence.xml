@@ -8,6 +8,8 @@
     <class>database.entities.SpecialPermissions</class>
     <class>database.entities.Log</class>
     <class>database.entities.LogType</class>
+    <class>dbview.DataManager</class>
+    <class>listeners.AccountsMouseListener</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/authentication?zeroDateTimeBehavior=convertToNull"/>
       <property name="javax.persistence.jdbc.user" value="root"/>
